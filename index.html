@@ -227,7 +227,13 @@
               <div class="card-body">
                 <h5 class="card-title">${p.name}</h5>
                 <p class="card-text text-muted">${p.desc}</p>
-                <a href="order.html?item=${encodeURIComponent(p.name)}" class="btn btn-warning w-100 btn-press">Sepete Ekle</a>
+                <button type="button"
+  class="btn btn-warning w-100 btn-press add-to-cart"
+  data-item="${p.name}"
+  data-price="${p.price}">
+  Sepete Ekle
+</button>
+
               </div>
             </div>
           </div>
