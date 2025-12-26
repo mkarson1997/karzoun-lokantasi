@@ -1,0 +1,78 @@
+<!-- register.html -->
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kayıt | KARZOUN LOKANTASI</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-dark text-light">
+
+<main class="container py-5" style="min-height: calc(100vh - 120px);">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+        <div class="card-body p-4 p-md-5">
+          <div class="text-center mb-4">
+            <div class="display-6 fw-bold">Kayıt Ol</div>
+            <div class="text-muted">Yeni hesap oluşturun.</div>
+          </div>
+
+          <div class="alert alert-success d-none" id="registerOk"></div>
+          <div class="alert alert-danger d-none" id="registerErr"></div>
+
+          <form id="registerForm" class="vstack gap-3">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Ad Soyad</label>
+                <input type="text" class="form-control" id="regName" placeholder="Mahmoud Karzoun" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Telefon</label>
+                <input type="tel" class="form-control" id="regPhone" placeholder="+90 5xx xxx xx xx" required>
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label">E-posta</label>
+              <input type="email" class="form-control" id="regEmail" placeholder="ornek@mail.com" required>
+            </div>
+
+            <div>
+              <label class="form-label">Şifre</label>
+              <input type="password" class="form-control" id="regPassword" minlength="6" placeholder="En az 6 karakter" required>
+            </div>
+
+            <button type="submit" class="btn btn-warning w-100 btn-press">
+              <i class="bi bi-person-plus me-1"></i>Kayıt Ol
+            </button>
+
+            <div class="text-center small text-muted">
+              Zaten hesabın var mı? <a href="login.html" class="text-decoration-none">Giriş Yap</a>
+            </div>
+          </form>
+
+          <div class="text-muted small mt-3">
+            Kayıt olarak <a href="kosullar.html" class="text-decoration-none">Koşullar</a> ve
+            <a href="gizlilik.html" class="text-decoration-none">Gizlilik</a> politikasını kabul etmiş olursun.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script type="module" src="js/layout.js"></script>
+  <script type="module" src="js/nav-auth.js"></script>
+  <script type="module" src="js/authPages.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

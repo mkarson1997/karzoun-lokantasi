@@ -1,0 +1,377 @@
+<!-- order.html -->
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sipariş | KARZOUN LOKANTASI</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!-- القائمة -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top nav-glass">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+        <img src="images/logo.png" alt="Logo" width="34" height="34" class="rounded-2">
+        <span>KARZOUN LOKANTASI</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="menuNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="index.html">Anasayfa</a></li>
+          <li class="nav-item"><a class="nav-link" href="menu.html">Menü</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">Hakkımızda</a></li>
+          <li class="nav-item"><a class="nav-link active" href="order.html">Sipariş</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">İletişim</a></li>
+
+          <!-- Auth Area (Guest/User) -->
+          <li class="nav-item" id="navGuest">
+            <a class="nav-link" href="login.html">Giriş Yap</a>
+          </li>
+          <li class="nav-item" id="navGuest2">
+            <a class="nav-link" href="register.html">Kayıt Ol</a>
+          </li>
+
+          <li class="nav-item dropdown d-none" id="navUser">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle me-1"></i>
+              <span id="navUserName">Hesabım</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="profile.html"><i class="bi bi-gear me-2"></i>Ayarlar / Profil</a></li>
+              <li><a class="dropdown-item" href="orders.html"><i class="bi bi-receipt me-2"></i>Siparişlerim</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><button class="dropdown-item text-danger" id="logoutBtn"><i class="bi bi-box-arrow-right me-2"></i>Çıkış</button></li>
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- الهيرو -->
+  <header class="hero-animated" style="margin-top:70px;">
+    <canvas class="particles-canvas" aria-hidden="true"></canvas>
+    <div class="container py-5 position-relative">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <span class="badge text-bg-warning mb-3">Online Sipariş </span>
+          <h1 class="display-6 fw-bold text-white mb-2">Sipariş Ver</h1>
+          <p class="text-white-50 mb-0">Ürün seç → Sepete ekle → Bilgileri doldur → Onay.</p>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="glass-card p-4">
+            <div class="d-flex justify-content-between">
+              <div class="text-white-50">Tahmini Süre</div>
+              <div class="text-white fw-bold"><i class="bi bi-lightning-charge text-warning"></i> 30–45 dk</div>
+            </div>
+            <div class="d-flex justify-content-between mt-2">
+              <div class="text-white-50">Teslimat</div>
+              <div class="text-white fw-bold">Konya Merkez </div>
+            </div>
+            <div class="d-flex justify-content-between mt-2">
+              <div class="text-white-50">Ödeme</div>
+              <div class="text-white fw-bold">Kapıda / Online </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- المين -->
+  <main class="container my-5">
+    <!-- العروض الكومبلار -->
+    <section class="mb-5">
+      <div class="d-flex justify-content-between align-items-end flex-wrap gap-2 mb-3">
+        <div>
+          <h2 class="h4 fw-bold mb-1 text-white">Özel Kombolar</h2>
+          <div class="text-white-50">En çok tercih edilen setler .</div>
+        </div>
+        <button class="btn btn-dark btn-sm btn-press" data-bs-toggle="offcanvas" data-bs-target="#cartCanvas" type="button">
+          <i class="bi bi-cart3 me-1"></i>Sepeti Aç
+        </button>
+      </div>
+
+      <div id="productGrid" class="row g-4">
+        <div class="col-12 col-md-6 col-lg-4 product" data-category="combo" data-name="Karzoun Kombo 1">
+          <div class="card h-100 shadow-sm card-hover">
+            <div class="combo-img-wrap">
+              <img src="images/kambo1.png" class="card-img-top combo-img" alt="Kombo 1">
+            </div>
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <h3 class="h5 mb-1">Karzoun Kombo 1</h3>
+                <span class="price-tag">₺299</span>
+              </div>
+              <p class="text-muted mb-3">Tavuk şavurma + patates + ayran + turşu.</p>
+              <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Karzoun Kombo 1" data-price="299" type="button">
+                <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4 product" data-category="combo" data-name="Karzoun Kombo 2">
+          <div class="card h-100 shadow-sm card-hover">
+            <div class="combo-img-wrap">
+              <img src="images/kambo2.png" class="card-img-top combo-img" alt="Kombo 2">
+            </div>
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <h3 class="h5 mb-1">Karzoun Kombo 2</h3>
+                <span class="price-tag">₺359</span>
+              </div>
+              <p class="text-muted mb-3">Karışık ızgara + pilav + salata + içecek.</p>
+              <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Karzoun Kombo 2" data-price="359" type="button">
+                <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4 product" data-category="combo" data-name="Tatlı Kombo">
+          <div class="card h-100 shadow-sm card-hover">
+            <div class="combo-img-wrap">
+              <img src="images/kombo3.png" class="card-img-top combo-img" alt="Tatlı Kombo">
+            </div>
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <h3 class="h5 mb-1">Tatlı Kombo</h3>
+                <span class="price-tag">₺219</span>
+              </div>
+              <p class="text-muted mb-3">Künefe + çay/kahve + fıstık dokunuşu.</p>
+              <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Tatlı Kombo" data-price="219" type="button">
+                <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- المنتجات -->
+    <section class="mb-5">
+      <h2 class="h4 fw-bold mb-3 text-white">Ürünler</h2>
+      <div id="randomProducts" class="row g-4"></div>
+      <script>
+        const menuProducts = [
+          {name:"Tavuk Şavurma Dürüm", price:155, img:"images/Tavuk_savurma.png", cat:"sandvic", desc:"Turşu + sarımsak sos."},
+          {name:"Şiş Kebap", price:285, img:"images/sis_Kebap.png", cat:"izgara", desc:"Dana kuşbaşı + köz sebze."},
+          {name:"Humus", price:95, img:"images/Humus.png", cat:"mezeler", desc:"Nohut + tahin + zeytinyağı."},
+          {name:"Künefe", price:140, img:"images/Kunefe.png", cat:"tatli", desc:"Sıcak servis, fıstıklı."},
+          {name:"Falafel Dürüm", price:135, img:"images/Falafel1.png", cat:"sandvic", desc:"Tahin sos + salata."},
+          {name:"Maklube", price:230, img:"images/Maklube.png", cat:"ana", desc:"Tavuk, patlıcan, pilav."},
+          {name:"Fattoush", price:90, img:"images/Fattus.png", cat:"mezeler", desc:"Taze sebzeler + sumak."},
+          {name:"Muhammara", price:110, img:"images/Muhammara.png", cat:"mezeler", desc:"Biber salçası + ceviz."},
+          {name:"Kibbeh", price:120, img:"images/Kibbeh1.png", cat:"mezeler", desc:"İçli köfte, kızartılmış."},
+          {name:"Baklava", price:80, img:"images/Baklava.png", cat:"tatli", desc:"Cevizli, şerbetli tatlı."}
+        ];
+
+        function getRandomProducts(arr, n) {
+          return arr.sort(()=>Math.random()-0.5).slice(0, n);
+        }
+
+        function renderRandomProducts() {
+          const randoms = getRandomProducts(menuProducts, 4);
+          const grid = document.getElementById("randomProducts");
+          grid.innerHTML = "";
+          randoms.forEach(p => {
+            grid.innerHTML += `
+              <div class="col-12 col-md-6 col-lg-3 product" data-category="${p.cat}" data-name="${p.name}">
+                <div class="card h-100 shadow-sm card-hover">
+                  <img src="${p.img}" class="card-img-top" alt="${p.name}">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <div class="fw-semibold">${p.name}</div>
+                      <div class="price-tag">₺${p.price}</div>
+                    </div>
+                    <div class="text-muted small mb-3">${p.desc}</div>
+                    <button class="btn btn-outline-dark w-100 btn-press add-to-cart" data-item="${p.name}" data-price="${p.price}" type="button">Sepete Ekle</button>
+                  </div>
+                </div>
+              </div>
+            `;
+          });
+        }
+        document.addEventListener("DOMContentLoaded", renderRandomProducts);
+      </script>
+    </section>
+
+    <!-- الطلب -->
+    <section class="mb-5" id="deliveryPanel">
+      <div class="row g-4">
+        <div class="col-lg-7">
+          <div class="card shadow-sm">
+            <div class="card-body p-4">
+              <h2 class="h5 fw-bold mb-3"><i class="bi bi-receipt me-2 text-warning"></i>Teslimat Bilgileri</h2>
+
+              <form id="checkoutForm" class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="custName">Ad Soyad</label>
+                  <input id="custName" class="form-control" type="text" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="custPhone">Telefon</label>
+                  <input id="custPhone" class="form-control" type="tel" placeholder="+90 ..." required>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="custAddress">Adres</label>
+                  <input id="custAddress" class="form-control" type="text" placeholder="Mahalle, Sokak, No..." required>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="custNote">Not</label>
+                  <textarea id="custNote" class="form-control" rows="3" placeholder="Kapı tarifi, sos tercihi..."></textarea>
+                </div>
+
+                <div class="col-12 d-flex gap-2 flex-wrap align-items-center">
+                  <button class="btn btn-warning btn-press" type="submit">
+                    <i class="bi bi-check2-circle me-1"></i>Siparişi Onayla
+                  </button>
+                  <span id="orderMsg" class="text-success d-none">Sipariş alındı. Teşekkürler!</span>
+                  <span id="orderErr" class="text-danger d-none">Gönderilemedi. Lütfen tekrar deneyin.</span>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="card shadow-sm">
+            <div class="card-body p-4">
+              <h2 class="h5 fw-bold mb-3"><i class="bi bi-cart-check me-2 text-warning"></i>Özet</h2>
+              <div class="d-flex justify-content-between">
+                <span class="text-muted">Ara Toplam</span>
+                <span id="sumSub">₺0</span>
+              </div>
+              <div class="d-flex justify-content-between mt-2">
+                <span class="text-muted">Teslimat </span>
+                <span id="sumShip">₺25</span>
+              </div>
+              <hr>
+              <div class="d-flex justify-content-between fw-bold">
+                <span>Toplam</span>
+                <span id="sumTotal">₺0</span>
+              </div>
+              <button class="btn btn-dark w-100 mt-3 btn-press" data-bs-toggle="offcanvas" data-bs-target="#cartCanvas" type="button">Sepeti Düzenle</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- تأثير الاوف كانفاس للسلة -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="cartCanvas">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title"><i class="bi bi-cart3 me-2"></i>Sepet</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Kapat"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div id="cartItemsCanvas" class="vstack gap-2">
+        <div class="text-muted">Sepet boş.</div>
+      </div>
+
+      <hr>
+
+      <div class="d-flex justify-content-between">
+        <span class="text-muted">Ara Toplam</span>
+        <span id="cartSub">₺0</span>
+      </div>
+
+      <div class="d-flex justify-content-between mt-2">
+        <span class="text-muted">Teslimat</span>
+        <span>₺25</span>
+      </div>
+
+      <div class="d-flex justify-content-between mt-3 fw-bold">
+        <span>Toplam</span>
+        <span id="cartTotal">₺25</span>
+      </div>
+
+      <!-- زر إرسال الطلبية يبقى فقط هنا داخل السلة -->
+      <button
+        id="sendOrderFromCart"
+        class="btn btn-warning w-100 mt-2 btn-press"
+        type="button"
+        data-action="checkout">
+        <i class="bi bi-send me-1"></i>Siparişi Gönder
+      </button>
+
+      <button id="clearCart" class="btn btn-outline-dark w-100 mt-2 btn-press" type="button">Sepeti Temizle</button>
+    </div>
+  </div>
+
+  <!-- الفوتر -->
+  <footer class="site-footer mt-5">
+    <div class="container py-5">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <img src="images/logo.png" alt="Logo" width="38" height="38" class="rounded-2">
+            <div class="fw-bold text-white">KARZOUN LOKANTASI</div>
+          </div>
+          <p class="text-white-50 mb-3">Gerçek Suriye mutfağı. Lezzet, hijyen, hızlı servis.</p>
+          <div class="d-flex gap-2">
+            <a class="footer-icon" href="https://www.instagram.com/mahmoud__karazon/" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
+            <a class="footer-icon" href="https://www.tiktok.com/@mahmoudka97" target="_blank" rel="noopener noreferrer"><i class="bi bi-tiktok"></i></a>
+            <a class="footer-icon" href="https://www.youtube.com/@Karzoun-Media-Lab" target="_blank" rel="noopener noreferrer"><i class="bi bi-youtube"></i></a>
+            <a class="footer-icon" href="https://wa.me/905538606094" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-6">
+          <div class="footer-title">Sayfalar</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Anasayfa</a></li>
+            <li><a href="menu.html">Menü</a></li>
+            <li><a href="about.html">Hakkımızda</a></li>
+            <li><a href="order.html">Sipariş</a></li>
+            <li><a href="contact.html">İletişim</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-6">
+          <div class="footer-title">Çalışma</div>
+          <ul class="footer-links">
+            <li><span class="text-white-50">Her gün:</span> 10:00 – 23:30</li>
+            <li><span class="text-white-50">Adres:</span> Konya / Merkez</li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="footer-title">Hızlı İletişim</div>
+          <div class="text-white-50 mb-2"><i class="bi bi-telephone me-2"></i>+90 553 860 60 94</div>
+          <div class="text-white-50 mb-3"><i class="bi bi-envelope me-2"></i>mkarson1997@gmail.com</div>
+          <a href="menu.html" class="btn btn-warning w-100 btn-press"><i class="bi bi-menu-button-wide me-1"></i>Menüye Dön</a>
+        </div>
+      </div>
+
+      <hr class="border-secondary my-4">
+      <div class="d-flex justify-content-between flex-wrap gap-2 text-white-50">
+        <div>© 2025 KARZOUN LOKANTASI</div>
+        <div><a class="text-white-50 text-decoration-none" href="gizlilik.html">Gizlilik</a> • <a class="text-white-50 text-decoration-none" href="kosullar.html">Koşullar</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script type="module" src="js/nav-auth.js"></script>
+  <script type="module" src="js/layout.js"></script>
+  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/order-page.js"></script>
+</body>
+</html>

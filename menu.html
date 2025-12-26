@@ -1,0 +1,1091 @@
+<!-- menu.html --> 
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menü | KARZOUN LOKANTASI</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- القائمة-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top nav-glass">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+        <img src="images/logo.png" alt="Logo" width="34" height="34" class="rounded-2">
+        <span>KARZOUN LOKANTASI</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="menuNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="index.html">Anasayfa</a></li>
+          <li class="nav-item"><a class="nav-link active" href="menu.html">Menü</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">Hakkımızda</a></li>
+          <li class="nav-item"><a class="nav-link" href="order.html">Sipariş</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">İletişim</a></li>
+          <!-- Auth Area (Guest/User) -->
+<li class="nav-item" id="navGuest">
+  <a class="nav-link" href="login.html">Giriş Yap</a>
+</li>
+<li class="nav-item" id="navGuest2">
+  <a class="nav-link" href="register.html">Kayıt Ol</a>
+</li>
+
+<li class="nav-item dropdown d-none" id="navUser">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="bi bi-person-circle me-1"></i>
+    <span id="navUserName">Hesabım</span>
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><a class="dropdown-item" href="profile.html"><i class="bi bi-gear me-2"></i>Ayarlar / Profil</a></li>
+    <li><a class="dropdown-item" href="orders.html"><i class="bi bi-receipt me-2"></i>Siparişlerim</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><button class="dropdown-item text-danger" id="logoutBtn"><i class="bi bi-box-arrow-right me-2"></i>Çıkış</button></li>
+  </ul>
+</li>
+
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!--  الهيرو (خلفية متحركة + نقاط)  بس ملغية يمكن -->
+  <header class="hero-animated" style="margin-top:70px;">
+  <canvas class="particles-canvas" aria-hidden="true"></canvas><!-- نقاط متحركة -->
+  <div class="container py-5 position-relative">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <span class="badge text-bg-warning mb-2">Menü</span>
+          <h1 class="fw-bold text-white mb-2">Lezzetlerimizi Keşfet</h1>
+          <p class="text-white-50 mb-0">
+            Şam, Halep ve Humus mutfağından seçilmiş lezzetler. (Fiyatlar örnektir)
+          </p>
+        </div>
+
+        <div class="col-lg-5">
+          <!-- بحث -->
+          <div class="input-group shadow-sm">
+            <span class="input-group-text bg-dark text-white border-0"><i class="bi bi-search"></i></span>
+            <input id="searchInput" class="form-control border-0" type="text"
+                   placeholder="Yemek ara... (örn: Şavurma, Kibbeh, Humus)">
+          </div>
+          <div class="small text-white-50 mt-2">İpucu: Filtreleri kullanarak hızlıca bul.</div>
+        </div>
+      </div>
+
+      <!-- أزرار فلترة  -->
+      <div class="d-flex gap-2 flex-wrap mt-4">
+        <button class="btn btn-outline-light btn-sm btn-press" data-filter="all">Tümü</button>
+        <button class="btn btn-outline-light btn-sm btn-press" data-filter="mezeler">Mezeler</button>
+        <button class="btn btn-outline-light btn-sm btn-press" data-filter="corbalar">Çorbalar</button>
+        <button class="btn btn-outline-light btn-sm btn-press" data-filter="ana">Ana Yemekler</button>
+        <button class="btn btn-outline-light btn-sm btn-press" data-filter="izgara">Izgara</button>
+        <button class="btn btn-outline-light btn-sm btn-press" data-filter="sandvic">Sandviç</button>
+        <button class="btn btn-outline-light btn-sm btn-press" data-filter="tatli">Tatlı</button>
+
+        <!-- ملاحظة: فتح السلة يتم من الزر العائم فوق الـ  (cart-fab) -->
+      </div>
+    </div>
+  </header>
+
+  <!--  المين  -->
+  <main class="container my-5">
+
+   
+
+    <!-- Grid -->
+    <div id="menuGrid" class="row g-4">
+
+       <!-- قائمة المنتجات -->
+
+      <!-- 0  منتج -->
+      <div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="mezeler" data-name="Humus">
+        <div class="card h-100 shadow-sm card-hover">
+          <img src="images/Humus.png" class="card-img-top" alt="Humus">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <h5 class="card-title mb-1">Humus</h5>
+              <span class="price-tag">₺95</span>
+            </div>
+            <p class="card-text text-muted">Nohut, tahin, zeytinyağı.</p>
+            <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Humus" data-price="95">
+              <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1  منتج -->
+      <div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="mezeler" data-name="Baba Gannuş">
+        <div class="card h-100 shadow-sm card-hover">
+          <img src="images/Baba_Gannus.png" class="card-img-top" alt="Baba Gannuş">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <h5 class="card-title mb-1">Baba Gannuş</h5>
+              <span class="price-tag">₺105</span>
+            </div>
+            <p class="card-text text-muted">Köz patlıcan, tahin, sarımsak.</p>
+            <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Baba Gannuş" data-name="Baba Gannuş" data-price="105">
+              <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 منتج -->
+      <div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="mezeler" data-name="Baba Gannuş">
+        <div class="card h-100 shadow-sm card-hover">
+          <img src="images/Baba_Gannus.png" class="card-img-top" alt="Baba Gannuş">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <h5 class="card-title mb-1">Baba Gannuş</h5>
+              <span class="price-tag">₺105</span>
+            </div>
+            <p class="card-text text-muted">Köz patlıcan, tahin, sarımsak.</p>
+            <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Baba Gannuş" data-price="105">
+              <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+            </button>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 منتج -->
+      <div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="mezeler" data-name="Muhammara">
+        <div class="card h-100 shadow-sm card-hover">
+          <img src="images/Muhammara.png" class="card-img-top" alt="Muhammara">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <h5 class="card-title mb-1">Muhammara (Acuka)</h5>
+              <span class="price-tag">₺110</span>
+            </div>
+            <p class="card-text text-muted">Ceviz, biber salçası, baharat.</p>
+            <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Muhammara" data-price="110">
+              <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+            </button>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 منتج -->
+      <div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="mezeler" data-name="Tabbule">
+        <div class="card h-100 shadow-sm card-hover">
+          <img src="images/Tabbule.png" class="card-img-top" alt="Tabbule">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <h5 class="card-title mb-1">Tabbule</h5>
+              <span class="price-tag">₺90</span>
+            </div>
+            <p class="card-text text-muted">Maydanoz, bulgur, limon.</p>
+            <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Tabbule" data-price="90">
+              <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+            </button>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5  منتج -->
+      <div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="mezeler" data-name="Fattuş">
+        <div class="card h-100 shadow-sm card-hover">
+          <img src="images/Fattus.png" class="card-img-top" alt="Fattuş">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <h5 class="card-title mb-1">Fattuş</h5>
+              <span class="price-tag">₺95</span>
+            </div>
+            <p class="card-text text-muted">Kızarmış pita, sebze, sumak.</p>
+            <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Fattuş" data-price="95">
+              <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 منتج -->
+      <div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="mezeler" data-name="Mutabbal">
+        <div class="card h-100 shadow-sm card-hover">
+          <img src="images/Mutabbal.png" class="card-img-top" alt="Mutabbal">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <h5 class="card-title mb-1">Mutabbal</h5>
+              <span class="price-tag">₺105</span>
+            </div>
+            <p class="card-text text-muted">Patlıcan ezmesi, yoğurt, tahin.</p>
+            <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Mutabbal" data-price="105">
+              <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 منتج -->
+      <div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="mezeler" data-name="Warak Enab">
+        <div class="card h-100 shadow-sm card-hover">
+          <img src="images/Warak_Enab.png" class="card-img-top" alt="Warak Enab">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <h5 class="card-title mb-1">Warak Enab (Yaprak Sarma)</h5>
+              <span class="price-tag">₺120</span>
+            </div>
+            <p class="card-text text-muted">Zeytinyağlı, limonlu.</p>
+            <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Warak Enab" data-price="120">
+              <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 منتج -->
+      <div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="mezeler" data-name="Kibbeh Nayyeh">
+        <div class="card h-100 shadow-sm card-hover">
+          <img src="images/Kibbeh_Nayyeh.png" class="card-img-top" alt="Kibbeh Nayyeh">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <h5 class="card-title mb-1">Kibbeh Nayyeh</h5>
+              <span class="price-tag">₺160</span>
+            </div>
+            <p class="card-text text-muted">Çiğ köfte tarzı.</p>
+            <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Kibbeh Nayyeh" data-price="160">
+              <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9 منتج -->
+      <div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="mezeler" data-name="Şankliş">
+        <div class="card h-100 shadow-sm card-hover">
+          <img src="images/sanklis.png" class="card-img-top" alt="Şankliş">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <h5 class="card-title mb-1">Şankliş</h5>
+              <span class="price-tag">₺115</span>
+            </div>
+            <p class="card-text text-muted">Baharatlı peynir, zeytinyağı.</p>
+            <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Şankliş" data-price="115">
+              <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10  منتج -->
+      <div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="mezeler" data-name="Halep Ezmesi">
+        <div class="card h-100 shadow-sm card-hover">
+          <img src="images/Halep_Ezmesi.png" class="card-img-top" alt="Halep Ezmesi">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <h5 class="card-title mb-1">Halep Ezmesi</h5>
+              <span class="price-tag">₺110</span>
+            </div>
+            <p class="card-text text-muted">Acılı salça, ceviz, baharat.</p>
+            <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Halep Ezmesi" data-price="110">
+              <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11 منتج -->
+      <div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="corbalar" data-name="Mercimek Çorbası">
+        <div class="card h-100 shadow-sm card-hover">
+          <img src="images/Mercimek.png" class="card-img-top" alt="Mercimek Çorbası">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <h5 class="card-title mb-1">Suriye Usulü Mercimek Çorbası</h5>
+              <span class="price-tag">₺75</span>
+            </div>
+            <p class="card-text text-muted">Limonla servis edilir.</p>
+            <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Mercimek Çorbası" data-price="75">
+              <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12 منتج -->
+      <div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="corbalar" data-name="Freekeh Çorbası">
+        <div class="card h-100 shadow-sm card-hover">
+          <img src="images/Freekeh.png" class="card-img-top" alt="Freekeh Çorbası">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <h5 class="card-title mb-1">Şorbet Freekeh (Freekeh Çorbası)</h5>
+              <span class="price-tag">₺90</span>
+            </div>
+            <p class="card-text text-muted">Buğday + tavuk aroması.</p>
+            <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Freekeh Çorbası" data-price="90">
+              <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 13 منتج -->
+      <div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="corbalar" data-name="Bamya">
+        <div class="card h-100 shadow-sm card-hover">
+          <img src="images/Bamya.png" class="card-img-top" alt="Bamya">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <h5 class="card-title mb-1">Bamya (Çorba/Stil)</h5>
+              <span class="price-tag">₺95</span>
+            </div>
+            <p class="card-text text-muted">Domatesli, ekşili.</p>
+            <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Bamya (Çorba)" data-price="95">
+              <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 14 منتج -->
+      <div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="corbalar" data-name="Tarhana">
+        <div class="card h-100 shadow-sm card-hover">
+          <img src="images/Tarhanasi.png" class="card-img-top" alt="Tarhana">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <h5 class="card-title mb-1">Suriye Tarhanası</h5>
+              <span class="price-tag">₺80</span>
+            </div>
+            <p class="card-text text-muted">Kremamsı, sıcak servis.</p>
+            <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Suriye Tarhanası" data-price="80">
+              <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 15 منتج -->
+      <div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="ana" data-name="Maklube">
+        <div class="card h-100 shadow-sm card-hover">
+          <img src="images/Maklube.png" class="card-img-top" alt="Maklube">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <h5 class="card-title mb-1">Maklube</h5>
+              <span class="price-tag">₺230</span>
+            </div>
+            <p class="card-text text-muted">Tavuk, patlıcan, pilav.</p>
+            <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Maklube" data-price="230">
+              <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+            </button>
+          </div>
+        </div>
+      </div>
+
+<!-- 16 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="ana" data-name="Kabsa">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Kabsa.png" class="card-img-top" alt="Kabsa">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Kabsa (Arap Pilavı)</h5>
+        <span class="price-tag">₺240</span>
+      </div>
+      <p class="card-text text-muted">Baharatlı pilav + et/tavuk.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Kabsa" data-price="240">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 17 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="ana" data-name="Freekeh Pilavı">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Freekehp.png" class="card-img-top" alt="Freekeh Pilavı">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Freekeh Pilavı</h5>
+        <span class="price-tag">₺210</span>
+      </div>
+      <p class="card-text text-muted">Yeşil buğday, tavuk suyu.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Freekeh Pilavı" data-price="210">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 18 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="ana" data-name="Molokhiya">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Molokhiya.png" class="card-img-top" alt="Molokhiya">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Molokhiya</h5>
+        <span class="price-tag">₺190</span>
+      </div>
+      <p class="card-text text-muted">Sarımsaklı, limonlu yeşillik yemeği.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Molokhiya" data-price="190">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 19 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="ana" data-name="Et Güveç">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Et_Guvec.png" class="card-img-top" alt="Et Güveç">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Et Güveç (Suriye Usulü)</h5>
+        <span class="price-tag">₺260</span>
+      </div>
+      <p class="card-text text-muted">Sebzeli, fırın lezzeti.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Et Güveç" data-price="260">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 20 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="ana" data-name="Bamya Yemeği">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Bamya1.png" class="card-img-top" alt="Bamya Yemeği">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Bamya Yemeği</h5>
+        <span class="price-tag">₺220</span>
+      </div>
+      <p class="card-text text-muted">Domates soslu, etli.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Bamya Yemeği" data-price="220">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 21 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="ana" data-name="Yalanji">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Yalanji.png" class="card-img-top" alt="Yalanji">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Yalanji (Zeytinyağlı Sarma)</h5>
+        <span class="price-tag">₺140</span>
+      </div>
+      <p class="card-text text-muted">Soğuk servis, limonlu.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Yalanji" data-price="140">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 22 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="ana" data-name="Şişbarak">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/sisbarak.png" class="card-img-top" alt="Şişbarak">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Şişbarak</h5>
+        <span class="price-tag">₺215</span>
+      </div>
+      <p class="card-text text-muted">Yoğurt soslu mantı.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Şişbarak" data-price="215">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 23 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="ana" data-name="Kibbeh">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Kibbeh1.png" class="card-img-top" alt="Kibbeh">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">İçli Köfte (Kibbeh)</h5>
+        <span class="price-tag">₺160</span>
+      </div>
+      <p class="card-text text-muted">Kızartma ya da fırın.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Kibbeh" data-price="160">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 24 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="ana" data-name="Kibbeh Labaniye">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/KibbehـLabaniye.png" class="card-img-top" alt="Kibbeh Labaniye">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Kibbeh Labaniye</h5>
+        <span class="price-tag">₺240</span>
+      </div>
+      <p class="card-text text-muted">Yoğurtlu içli köfte yemeği.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Kibbeh Labaniye" data-price="240">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 25 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="ana" data-name="Mahşi">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Mahsi.png" class="card-img-top" alt="Mahşi">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Mahşi (Dolma)</h5>
+        <span class="price-tag">₺230</span>
+      </div>
+      <p class="card-text text-muted">Kabak, patlıcan, biber dolması.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Mahşi" data-price="230">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 26 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="ana" data-name="Kuzeybe">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Kuzeybe.png" class="card-img-top" alt="Kuzeybe">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Kuzeybe (Kibbeh Tepsisi)</h5>
+        <span class="price-tag">₺260</span>
+      </div>
+      <p class="card-text text-muted">Tepside fırın kibbeh.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Kuzeybe" data-price="260">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 27 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="ana" data-name="Mücendra">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Mucendra.png" class="card-img-top" alt="Mücendra">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Mücendra (Mercimek Pilavı)</h5>
+        <span class="price-tag">₺165</span>
+      </div>
+      <p class="card-text text-muted">Karamelize soğanla.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Mücendra" data-price="165">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 28 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="ana" data-name="Fasulye">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/BeyazـFasulye.png" class="card-img-top" alt="Fasulye">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Beyaz Fasulye (Suriye Usulü)</h5>
+        <span class="price-tag">₺200</span>
+      </div>
+      <p class="card-text text-muted">Domatesli, etli.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Beyaz Fasulye" data-price="200">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 29 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="ana" data-name="Mansaf">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Mansaf.png" class="card-img-top" alt="Mansaf">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Mansaf</h5>
+        <span class="price-tag">₺290</span>
+      </div>
+      <p class="card-text text-muted">Et + yoğurt sosu + pilav.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Mansaf" data-price="290">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 30 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="sandvic" data-name="Zahterli Manakish">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/ZahterliـManakish.png" class="card-img-top" alt="Zahterli Manakish">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Zahterli Manakish</h5>
+        <span class="price-tag">₺120</span>
+      </div>
+      <p class="card-text text-muted">Kekik (zahter) + zeytinyağı.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Zahterli Manakish" data-price="120">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 31 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="sandvic" data-name="Tavuk Şavurma Dürüm">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Tavuk_savurma.png" class="card-img-top" alt="Tavuk Şavurma Dürüm">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Tavuk Şavurma Dürüm</h5>
+        <span class="price-tag">₺155</span>
+      </div>
+      <p class="card-text text-muted">Turşu + sarımsak sos.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Tavuk Şavurma Dürüm" data-price="155">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 32 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="sandvic" data-name="Et Şavurma Dürüm">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Et_savurma.png" class="card-img-top" alt="Et Şavurma Dürüm">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Et Şavurma Dürüm</h5>
+        <span class="price-tag">₺175</span>
+      </div>
+      <p class="card-text text-muted">Tahini + turşu.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Et Şavurma Dürüm" data-price="175">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 33 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="sandvic" data-name="Falafel Dürüm">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Falafel1.png" class="card-img-top" alt="Falafel Dürüm">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Falafel Dürüm</h5>
+        <span class="price-tag">₺135</span>
+      </div>
+      <p class="card-text text-muted">Tahin sos + salata.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Falafel Dürüm" data-price="135">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 34 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="sandvic" data-name="Sucuklu Manakish">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Sucuklu_Manakish.png" class="card-img-top" alt="Sucuklu Manakish">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Sucuklu Manakish</h5>
+        <span class="price-tag">₺140</span>
+      </div>
+      <p class="card-text text-muted">Fırından sıcak, peynirli.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Sucuklu Manakish" data-price="140">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 35 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="sandvic" data-name="Peynirli Manakish">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Peynirli_Manakish.png" class="card-img-top" alt="Peynirli Manakish">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Peynirli Manakish</h5>
+        <span class="price-tag">₺130</span>
+      </div>
+      <p class="card-text text-muted">Krem peynir + baharat.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Peynirli Manakish" data-price="130">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 36 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="izgara" data-name="Şiş Tavuk">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/sis_Tavuk.png" class="card-img-top" alt="Şiş Tavuk">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Şiş Tavuk</h5>
+        <span class="price-tag">₺240</span>
+      </div>
+      <p class="card-text text-muted">Izgara + pilav + salata.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Şiş Tavuk" data-price="240">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 37 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="izgara" data-name="Adana Kebap">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/SuriyeـKebap.png" class="card-img-top" alt="Adana Kebap">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Suriye Usulü Adana Kebap</h5>
+        <span class="price-tag">₺265</span>
+      </div>
+      <p class="card-text text-muted">Acılı, köz biberle.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Adana Kebap" data-price="265">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 38 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="izgara" data-name="Şiş Kebap">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/sis_Kebap.png" class="card-img-top" alt="Şiş Kebap">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Şiş Kebap</h5>
+        <span class="price-tag">₺285</span>
+      </div>
+      <p class="card-text text-muted">Dana kuşbaşı, köz sebze.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Şiş Kebap" data-price="285">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 39 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="izgara" data-name="Kafta">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Kafta.png" class="card-img-top" alt="Kafta">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Kafta (Köfte Şiş)</h5>
+        <span class="price-tag">₺250</span>
+      </div>
+      <p class="card-text text-muted">Soğan + maydanoz aroması.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Kafta" data-price="250">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 40 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="izgara" data-name="Karışık Izgara">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Karisikـizgara.png" class="card-img-top" alt="Karışık Izgara">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Karışık Izgara</h5>
+        <span class="price-tag">₺340</span>
+      </div>
+      <p class="card-text text-muted">Kebap + şiş + tavuk.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Karışık Izgara" data-price="340">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 41 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="mezeler" data-name="Fatteh">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Fatteh.png" class="card-img-top" alt="Fatteh">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Fatteh</h5>
+        <span class="price-tag">₺150</span>
+      </div>
+      <p class="card-text text-muted">Pita + yoğurt + nohut.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Fatteh" data-price="150">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 42 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="mezeler" data-name="Kızarmış Kibbeh">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Kizarmis_Kibbeh.png" class="card-img-top" alt="Kızarmış Kibbeh">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Kızarmış Kibbeh (6 Adet)</h5>
+        <span class="price-tag">₺180</span>
+      </div>
+      <p class="card-text text-muted">Çıtır dış, baharatlı iç.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Kızarmış Kibbeh" data-price="180">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 43 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="tatli" data-name="Künefe">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Kunefe.png" class="card-img-top" alt="Künefe">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Künefe</h5>
+        <span class="price-tag">₺140</span>
+      </div>
+      <p class="card-text text-muted">Peynirli, şerbetli.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Künefe" data-price="140">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 44 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="tatli" data-name="Baklava">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Baklava.png" class="card-img-top" alt="Baklava">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Baklava</h5>
+        <span class="price-tag">₺150</span>
+      </div>
+      <p class="card-text text-muted">Fıstıklı, çıtır katlar.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Baklava" data-price="150">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 45 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="tatli" data-name="Basbusa">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Basbusa.png" class="card-img-top" alt="Basbusa">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Basbusa (Şam Tatlısı)</h5>
+        <span class="price-tag">₺110</span>
+      </div>
+      <p class="card-text text-muted">İrmikli, şerbetli.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Basbusa" data-price="110">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 46 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="tatli" data-name="Maamoul">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Maamoul.png" class="card-img-top" alt="Maamoul">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Maamoul</h5>
+        <span class="price-tag">₺120</span>
+      </div>
+      <p class="card-text text-muted">Hurma/ceviz dolgulu kurabiye.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Maamoul" data-price="120">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 47 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="tatli" data-name="Halawet el Jibn">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/HalawetـelـJibn.png" class="card-img-top" alt="Halawet el Jibn">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Halawet el Jibn</h5>
+        <span class="price-tag">₺155</span>
+      </div>
+      <p class="card-text text-muted">Kaymaklı, fıstıklı tatlı.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Halawet el Jibn" data-price="155">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 48 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="tatli" data-name="Kadayıf">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Kadayif.png" class="card-img-top" alt="Kadayıf">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Kadayıf</h5>
+        <span class="price-tag">₺135</span>
+      </div>
+      <p class="card-text text-muted">Cevizli/fıstıklı.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Kadayıf" data-price="135">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 49 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="tatli" data-name="Aşure">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Asure.png" class="card-img-top" alt="Aşure">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Aşure</h5>
+        <span class="price-tag">₺95</span>
+      </div>
+      <p class="card-text text-muted">Kuruyemiş ve tahıllar.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Aşure" data-price="95">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 50 منتج -->
+<div class="col-12 col-sm-6 col-lg-4 menu-item" data-category="mezeler" data-name="Kibbeh Çiğ">
+  <div class="card h-100 shadow-sm card-hover">
+    <img src="images/Kibbeh_cig.png" class="card-img-top" alt="Kibbeh Çiğ">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <h5 class="card-title mb-1">Kibbeh Çiğ</h5>
+        <span class="price-tag">₺155</span>
+      </div>
+      <p class="card-text text-muted">Baharatlı bulgur karışımı.</p>
+      <button class="btn btn-warning w-100 btn-press add-to-cart" data-item="Kibbeh Çiğ" data-price="155">
+        <i class="bi bi-bag-plus me-1"></i>Sepete Ekle
+      </button>
+    </div>
+  </div>
+</div>
+
+
+    </div>
+
+    <!-- زر تحميل المزيد  -->
+    <div class="text-center mt-4">
+      <a class="btn btn-dark btn-press" href="order.html"><i class="bi bi-bag-check me-1"></i>Siparişe Devam Et</a>
+    </div>
+
+  </main>
+
+  <!--  سلة المشتريات -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="cartCanvas">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title"><i class="bi bi-cart3 me-2"></i>Sepet</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Kapat"></button>
+    </div>
+    <div class="offcanvas-body">
+
+      <div id="cartItemsCanvas" class="vstack gap-2">
+        <div class="text-muted">Sepet boş.</div>
+      </div>
+
+      <hr>
+
+      <div class="d-flex justify-content-between">
+        <span class="text-muted">Ara Toplam</span>
+        <span id="cartSub">₺0</span>
+      </div>
+
+      <div class="d-flex justify-content-between mt-2">
+        <span class="text-muted">Teslimat</span>
+        <span>₺25</span>
+      </div>
+
+      <div class="d-flex justify-content-between mt-3 fw-bold">
+        <span>Toplam</span>
+        <span id="cartTotal">₺25</span>
+      </div>
+
+      <button id="clearCart" class="btn btn-outline-dark w-100 mt-3 btn-press">Sepeti Temizle</button>
+      <a href="order.html" class="btn btn-warning w-100 mt-2 btn-press"><i class="bi bi-bag-check me-1"></i>Sipariş Sayfası</a>
+    </div>
+  </div>
+
+  <!--  الفوتر -->
+  <footer class="site-footer mt-5">
+    <div class="container py-5">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <img src="images/logo.png" alt="Logo" width="98" height="98" class="rounded-2">
+            <div class="fw-bold text-white">KARZOUN LOKANTASI</div>
+          </div>
+          <p class="text-white-50 mb-3">Gerçek Suriye mutfağı. Lezzet, hijyen, hızlı servis.</p>
+          <div class="d-flex gap-2">
+            <a class="footer-icon" href="https://www.instagram.com/mahmoud__karazon/" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
+            <a class="footer-icon" href="https://www.tiktok.com/@mahmoudka97" target="_blank" rel="noopener noreferrer"><i class="bi bi-tiktok"></i></a>
+            <a class="footer-icon" href="https://www.youtube.com/@Karzoun-Media-Lab" target="_blank" rel="noopener noreferrer"><i class="bi bi-youtube"></i></a>
+            <a class="footer-icon" href="https://wa.me/905538606094" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-6">
+          <div class="footer-title">Sayfalar</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Anasayfa</a></li>
+            <li><a href="menu.html">Menü</a></li>
+            <li><a href="about.html">Hakkımızda</a></li>
+            <li><a href="order.html">Sipariş</a></li>
+            <li><a href="contact.html">İletişim</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-6">
+          <div class="footer-title">Çalışma</div>
+          <ul class="footer-links">
+            <li><span class="text-white-50">Her gün:</span> 10:00 – 23:30</li>
+            <li><span class="text-white-50">Paket:</span> 11:00 – 23:00</li>
+            <li><span class="text-white-50">Adres:</span> Konya / Merkez</li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="footer-title">Hızlı İletişim</div>
+          <div class="text-white-50 mb-2"><i class="bi bi-telephone me-2"></i>+90 553 860 60 94</div>
+          <div class="text-white-50 mb-3"><i class="bi bi-envelope me-2"></i>mkarson1997@gmail.com</div>
+          <a href="order.html" class="btn btn-warning w-100 btn-press"><i class="bi bi-bag-check me-1"></i>Hemen Sipariş</a>
+        </div>
+      </div>
+
+      <hr class="border-secondary my-4">
+      <div class="d-flex justify-content-between flex-wrap gap-2 text-white-50">
+        <div>© 2025 KARZOUN LOKANTASI</div>
+        <div><a class="text-white-50 text-decoration-none" href="gizlilik.html">Gizlilik</a> • <a class="text-white-50 text-decoration-none" href="kosullar.html">Koşullar</a></div>
+      </div>
+    </div>
+  </footer>
+
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script type="module" src="js/layout.js"></script>
+  <script type="module" src="js/nav-auth.js"></script>
+  <script type="module" src="js/app.js"></script>
+
+</body>
+</html>
+
+
