@@ -474,3 +474,8 @@ body{padding-bottom:0px}
     text-align: center;
   }
 }
+.hero-animated [data-filter].active{
+  background: rgba(255,193,7,.25);
+  border-color: rgba(255,193,7,.65);
+}
+/*  اعدادات قائمة المنتجات  */
