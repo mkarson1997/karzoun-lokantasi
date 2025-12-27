@@ -161,24 +161,32 @@
       </div>
     </section>
 
-    <!-- المنتجات -->
-    <section class="mb-5">
-      <h2 class="h4 fw-bold mb-3 text-white">Ürünler</h2>
-      <div class="d-flex justify-content-between align-items-center mb-2">
-  <button id="prodPrev" class="btn btn-dark btn-sm btn-press" type="button" aria-label="Geri">
-    <i class="bi bi-chevron-left"></i>
-  </button>
-
-  <div class="text-white-50 small">Tüm menü ürünleri</div>
-
-  <button id="prodNext" class="btn btn-dark btn-sm btn-press" type="button" aria-label="İleri">
-    <i class="bi bi-chevron-right"></i>
-  </button>
+    <!-- Arama -->
+<div class="input-group mb-3 shadow-sm">
+  <span class="input-group-text bg-dark text-white border-0"><i class="bi bi-search"></i></span>
+  <input id="orderSearchInput" class="form-control border-0" type="text" placeholder="Ürün ara...">
 </div>
 
-<div id="productsCarousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false" data-bs-touch="true">
-  <div class="carousel-inner" id="productsCarouselInner"></div>
-</div>
+<!-- Ürünler -->
+<section class="mb-5">
+  <h2 class="h4 fw-bold mb-3 text-white">Ürünler</h2>
+
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <button id="prodPrev" class="btn btn-dark btn-sm btn-press" type="button" aria-label="Geri">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+
+    <div class="text-white-50 small">Tüm menü ürünleri</div>
+
+    <button id="prodNext" class="btn btn-dark btn-sm btn-press" type="button" aria-label="İleri">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+
+  <div id="productsCarousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false" data-bs-touch="true">
+    <div class="carousel-inner" id="productsCarouselInner"></div>
+  </div>
+
 
       <script>
   const menuProducts = [
@@ -246,59 +254,108 @@
 ];
 
 
-  function chunk(arr, size) {
-    const out = [];
-    for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
-    return out;
-  }
+  const menuProductsAll = Array.isArray(menuProducts) ? [...menuProducts] : [];
 
-  function renderProductsCarousel() {
-    const inner = document.getElementById("productsCarouselInner");
-    if (!inner) return;
+    function chunk(arr, size) {
+      const out = [];
+      for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
+      return out;
+    }
 
-    const slides = chunk(menuProducts, 4); // 4 منتجات بكل سلايد
-    inner.innerHTML = "";
+    function renderProductsCarousel(list) {
+      const inner = document.getElementById("productsCarouselInner");
+      const carouselEl = document.getElementById("productsCarousel");
+      if (!inner || !carouselEl) return;
 
-    slides.forEach((group, idx) => {
-      const active = idx === 0 ? "active" : "";
-      const itemsHtml = group.map(p => `
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="card h-100 shadow-sm card-hover">
-            <img src="${p.img}" class="card-img-top" alt="${p.name}">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <div class="fw-semibold">${p.name}</div>
-                <div class="price-tag">₺${p.price}</div>
+      const slides = chunk(list, 4); // 4 منتجات بكل سلايد
+      inner.innerHTML = "";
+
+      if (!slides.length) {
+        inner.innerHTML = `
+          <div class="carousel-item active">
+            <div class="p-4 text-center text-white-50">Sonuç bulunamadı.</div>
+          </div>
+        `;
+      } else {
+        slides.forEach((group, idx) => {
+          const active = idx === 0 ? "active" : "";
+          const itemsHtml = group.map(p => `
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="card h-100 shadow-sm card-hover">
+                <img src="${p.img}" class="card-img-top" alt="${p.name}">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <div class="fw-semibold">${p.name}</div>
+                    <div class="price-tag">₺${p.price}</div>
+                  </div>
+                  <div class="text-muted small mb-3">${p.desc}</div>
+                  <button class="btn btn-outline-dark w-100 btn-press add-to-cart"
+                    data-item="${p.name}" data-price="${p.price}" type="button">
+                    Sepete Ekle
+                  </button>
+                </div>
               </div>
-              <div class="text-muted small mb-3">${p.desc}</div>
-              <button class="btn btn-outline-dark w-100 btn-press add-to-cart"
-                data-item="${p.name}" data-price="${p.price}" type="button">
-                Sepete Ekle
-              </button>
             </div>
-          </div>
-        </div>
-      `).join("");
+          `).join("");
 
-      inner.innerHTML += `
-        <div class="carousel-item ${active}">
-          <div class="row g-4">
-            ${itemsHtml}
-          </div>
-        </div>
-      `;
+          inner.innerHTML += `
+            <div class="carousel-item ${active}">
+              <div class="row g-4">
+                ${itemsHtml}
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      // Bootstrap Carousel instance
+      const bsCarousel = window.bootstrap?.Carousel?.getOrCreateInstance(carouselEl, {
+        interval: false,
+        ride: false,
+        touch: true,
+        wrap: true
+      });
+
+      // رجّع لأول سلايد بعد كل render (مهم للبحث)
+      bsCarousel?.to(0);
+
+      // اربط الأزرار مرة واحدة فقط
+      const nextBtn = document.getElementById("prodNext");
+      const prevBtn = document.getElementById("prodPrev");
+
+      if (nextBtn && !nextBtn.dataset.bound) {
+        nextBtn.dataset.bound = "1";
+        nextBtn.addEventListener("click", () => bsCarousel?.next());
+      }
+      if (prevBtn && !prevBtn.dataset.bound) {
+        prevBtn.dataset.bound = "1";
+        prevBtn.addEventListener("click", () => bsCarousel?.prev());
+      }
+    }
+
+    function applyOrderSearch() {
+      const input = document.getElementById("orderSearchInput");
+      const q = (input?.value || "").toLowerCase().trim();
+
+      const filtered = !q ? menuProductsAll : menuProductsAll.filter(p => {
+        const name = (p.name || "").toLowerCase();
+        const cat  = (p.cat || "").toLowerCase();
+        const desc = (p.desc || "").toLowerCase();
+        return name.includes(q) || cat.includes(q) || desc.includes(q);
+      });
+
+      renderProductsCarousel(filtered);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderProductsCarousel(menuProductsAll);
+
+      const searchInput = document.getElementById("orderSearchInput");
+      if (searchInput) {
+        searchInput.addEventListener("input", applyOrderSearch);
+      }
     });
-
-    // ربط أزرار يمين/يسار
-    const carouselEl = document.getElementById("productsCarousel");
-    const bsCarousel = window.bootstrap?.Carousel?.getOrCreateInstance(carouselEl, { interval: false, ride: false });
-
-    document.getElementById("prodNext")?.addEventListener("click", () => bsCarousel?.next());
-    document.getElementById("prodPrev")?.addEventListener("click", () => bsCarousel?.prev());
-  }
-
-  document.addEventListener("DOMContentLoaded", renderProductsCarousel);
-</script>
+  </script>
 
     </section>
 
