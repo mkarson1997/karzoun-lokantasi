@@ -164,49 +164,142 @@
     <!-- المنتجات -->
     <section class="mb-5">
       <h2 class="h4 fw-bold mb-3 text-white">Ürünler</h2>
-      <div id="randomProducts" class="row g-4"></div>
+      <div class="d-flex justify-content-between align-items-center mb-2">
+  <button id="prodPrev" class="btn btn-dark btn-sm btn-press" type="button" aria-label="Geri">
+    <i class="bi bi-chevron-left"></i>
+  </button>
+
+  <div class="text-white-50 small">Tüm menü ürünleri</div>
+
+  <button id="prodNext" class="btn btn-dark btn-sm btn-press" type="button" aria-label="İleri">
+    <i class="bi bi-chevron-right"></i>
+  </button>
+</div>
+
+<div id="productsCarousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false" data-bs-touch="true">
+  <div class="carousel-inner" id="productsCarouselInner"></div>
+</div>
+
       <script>
-        const menuProducts = [
-          {name:"Tavuk Şavurma Dürüm", price:155, img:"images/Tavuk_savurma.png", cat:"sandvic", desc:"Turşu + sarımsak sos."},
-          {name:"Şiş Kebap", price:285, img:"images/sis_Kebap.png", cat:"izgara", desc:"Dana kuşbaşı + köz sebze."},
-          {name:"Humus", price:95, img:"images/Humus.png", cat:"mezeler", desc:"Nohut + tahin + zeytinyağı."},
-          {name:"Künefe", price:140, img:"images/Kunefe.png", cat:"tatli", desc:"Sıcak servis, fıstıklı."},
-          {name:"Falafel Dürüm", price:135, img:"images/Falafel1.png", cat:"sandvic", desc:"Tahin sos + salata."},
-          {name:"Maklube", price:230, img:"images/Maklube.png", cat:"ana", desc:"Tavuk, patlıcan, pilav."},
-          {name:"Fattoush", price:90, img:"images/Fattus.png", cat:"mezeler", desc:"Taze sebzeler + sumak."},
-          {name:"Muhammara", price:110, img:"images/Muhammara.png", cat:"mezeler", desc:"Biber salçası + ceviz."},
-          {name:"Kibbeh", price:120, img:"images/Kibbeh1.png", cat:"mezeler", desc:"İçli köfte, kızartılmış."},
-          {name:"Baklava", price:80, img:"images/Baklava.png", cat:"tatli", desc:"Cevizli, şerbetli tatlı."}
-        ];
+  const menuProducts = [
+  //  Mezeler 
+  {name:"Humus", price:95, img:"images/Humus.png", cat:"mezeler", desc:"Nohut, tahin, zeytinyağı."},
+  {name:"Baba Gannuş", price:105, img:"images/Baba_Gannus.png", cat:"mezeler", desc:"Köz patlıcan, tahin, sarımsak."},
+  {name:"Muhammara (Acuka)", price:110, img:"images/Muhammara.png", cat:"mezeler", desc:"Ceviz, biber salçası, baharat."},
+  {name:"Tabbule", price:90, img:"images/Tabbule.png", cat:"mezeler", desc:"Maydanoz, bulgur, limon."},
+  {name:"Fattuş", price:95, img:"images/Fattus.png", cat:"mezeler", desc:"Kızarmış pita, sebze, sumak."},
+  {name:"Mutabbal", price:105, img:"images/Mutabbal.png", cat:"mezeler", desc:"Patlıcan ezmesi, yoğurt, tahin."},
+  {name:"Warak Enab", price:120, img:"images/Warak_Enab.png", cat:"mezeler", desc:"Zeytinyağlı, limonlu."},
+  {name:"Kibbeh Nayyeh", price:160, img:"images/Kibbeh_Nayyeh.png", cat:"mezeler", desc:"Çiğ köfte tarzı."},
+  {name:"Şankliş", price:115, img:"images/sanklis.png", cat:"mezeler", desc:"Baharatlı peynir, zeytinyağı."},
+  {name:"Halep Ezmesi", price:110, img:"images/Halep_Ezmesi.png", cat:"mezeler", desc:"Acılı salça, ceviz, baharat."},
+  {name:"Fatteh", price:150, img:"images/Fatteh.png", cat:"mezeler", desc:"Pita + yoğurt + nohut."},
+  {name:"Kızarmış Kibbeh", price:180, img:"images/Kizarmis_Kibbeh.png", cat:"mezeler", desc:"Çıtır dış, baharatlı iç."},
+  {name:"Kibbeh Çiğ", price:155, img:"images/Kibbeh_cig.png", cat:"mezeler", desc:"Baharatlı bulgur karışımı."},
 
-        function getRandomProducts(arr, n) {
-          return arr.sort(()=>Math.random()-0.5).slice(0, n);
-        }
+  //  Çorbalar 
+  {name:"Mercimek Çorbası", price:75, img:"images/Mercimek.png", cat:"corbalar", desc:"Limonla servis edilir."},
+  {name:"Freekeh Çorbası", price:90, img:"images/Freekeh.png", cat:"corbalar", desc:"Buğday + tavuk aroması."},
+  {name:"Bamya (Çorba)", price:95, img:"images/Bamya.png", cat:"corbalar", desc:"Domatesli, ekşili."},
+  {name:"Suriye Tarhanası", price:80, img:"images/Tarhanasi.png", cat:"corbalar", desc:"Kremamsı, sıcak servis."},
 
-        function renderRandomProducts() {
-          const randoms = getRandomProducts(menuProducts, 4);
-          const grid = document.getElementById("randomProducts");
-          grid.innerHTML = "";
-          randoms.forEach(p => {
-            grid.innerHTML += `
-              <div class="col-12 col-md-6 col-lg-3 product" data-category="${p.cat}" data-name="${p.name}">
-                <div class="card h-100 shadow-sm card-hover">
-                  <img src="${p.img}" class="card-img-top" alt="${p.name}">
-                  <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                      <div class="fw-semibold">${p.name}</div>
-                      <div class="price-tag">₺${p.price}</div>
-                    </div>
-                    <div class="text-muted small mb-3">${p.desc}</div>
-                    <button class="btn btn-outline-dark w-100 btn-press add-to-cart" data-item="${p.name}" data-price="${p.price}" type="button">Sepete Ekle</button>
-                  </div>
-                </div>
+  //  Ana Yemekler 
+  {name:"Maklube", price:230, img:"images/Maklube.png", cat:"ana", desc:"Tavuk, patlıcan, pilav."},
+  {name:"Kabsa", price:240, img:"images/Kabsa.png", cat:"ana", desc:"Baharatlı pilav + et/tavuk."},
+  {name:"Freekeh Pilavı", price:210, img:"images/Freekehp.png", cat:"ana", desc:"Yeşil buğday, tavuk suyu."},
+  {name:"Molokhiya", price:190, img:"images/Molokhiya.png", cat:"ana", desc:"Sarımsaklı, limonlu."},
+  {name:"Et Güveç", price:260, img:"images/Et_Guvec.png", cat:"ana", desc:"Sebzeli, fırın lezzeti."},
+  {name:"Bamya Yemeği", price:220, img:"images/Bamya1.png", cat:"ana", desc:"Domates soslu, etli."},
+  {name:"Yalanji", price:140, img:"images/Yalanji.png", cat:"ana", desc:"Zeytinyağlı, soğuk servis."},
+  {name:"Şişbarak", price:215, img:"images/sisbarak.png", cat:"ana", desc:"Yoğurt soslu mantı."},
+  {name:"İçli Köfte (Kibbeh)", price:160, img:"images/Kibbeh1.png", cat:"ana", desc:"Kızartma ya da fırın."},
+  {name:"Kibbeh Labaniye", price:240, img:"images/KibbehـLabaniye.png", cat:"ana", desc:"Yoğurtlu içli köfte."},
+  {name:"Mahşi", price:230, img:"images/Mahsi.png", cat:"ana", desc:"Dolma çeşitleri."},
+  {name:"Kuzeybe", price:260, img:"images/Kuzeybe.png", cat:"ana", desc:"Tepside fırın kibbeh."},
+  {name:"Mücendra", price:165, img:"images/Mucendra.png", cat:"ana", desc:"Mercimek pilavı."},
+  {name:"Beyaz Fasulye", price:200, img:"images/BeyazـFasulye.png", cat:"ana", desc:"Domatesli, etli."},
+  {name:"Mansaf", price:290, img:"images/Mansaf.png", cat:"ana", desc:"Et + yoğurt sosu."},
+
+  //  Sandviç 
+  {name:"Zahterli Manakish", price:120, img:"images/ZahterliـManakish.png", cat:"sandvic", desc:"Kekik + zeytinyağı."},
+  {name:"Tavuk Şavurma Dürüm", price:155, img:"images/Tavuk_savurma.png", cat:"sandvic", desc:"Turşu + sarımsak sos."},
+  {name:"Et Şavurma Dürüm", price:175, img:"images/Et_savurma.png", cat:"sandvic", desc:"Tahini + turşu."},
+  {name:"Falafel Dürüm", price:135, img:"images/Falafel1.png", cat:"sandvic", desc:"Tahin sos + salata."},
+  {name:"Sucuklu Manakish", price:140, img:"images/Sucuklu_Manakish.png", cat:"sandvic", desc:"Fırından sıcak."},
+  {name:"Peynirli Manakish", price:130, img:"images/Peynirli_Manakish.png", cat:"sandvic", desc:"Krem peynir."},
+
+  //  Izgara 
+  {name:"Şiş Tavuk", price:240, img:"images/sis_Tavuk.png", cat:"izgara", desc:"Izgara + pilav + salata."},
+  {name:"Adana Kebap", price:265, img:"images/SuriyeـKebap.png", cat:"izgara", desc:"Acılı, köz biberle."},
+  {name:"Şiş Kebap", price:285, img:"images/sis_Kebap.png", cat:"izgara", desc:"Dana kuşbaşı."},
+  {name:"Kafta", price:250, img:"images/Kafta.png", cat:"izgara", desc:"Soğan + maydanoz."},
+  {name:"Karışık Izgara", price:340, img:"images/Karisikـizgara.png", cat:"izgara", desc:"Kebap + şiş + tavuk."},
+
+  //  Tatlı 
+  {name:"Künefe", price:140, img:"images/Kunefe.png", cat:"tatli", desc:"Peynirli, şerbetli."},
+  {name:"Baklava", price:150, img:"images/Baklava.png", cat:"tatli", desc:"Fıstıklı."},
+  {name:"Basbusa", price:110, img:"images/Basbusa.png", cat:"tatli", desc:"İrmikli şam tatlısı."},
+  {name:"Maamoul", price:120, img:"images/Maamoul.png", cat:"tatli", desc:"Hurma/ceviz dolgulu."},
+  {name:"Halawet el Jibn", price:155, img:"images/HalawetـelـJibn.png", cat:"tatli", desc:"Kaymaklı, fıstıklı."},
+  {name:"Kadayıf", price:135, img:"images/Kadayif.png", cat:"tatli", desc:"Cevizli/fıstıklı."},
+  {name:"Aşure", price:95, img:"images/Asure.png", cat:"tatli", desc:"Kuruyemiş ve tahıllar."}
+];
+
+
+  function chunk(arr, size) {
+    const out = [];
+    for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
+    return out;
+  }
+
+  function renderProductsCarousel() {
+    const inner = document.getElementById("productsCarouselInner");
+    if (!inner) return;
+
+    const slides = chunk(menuProducts, 4); // 4 منتجات بكل سلايد
+    inner.innerHTML = "";
+
+    slides.forEach((group, idx) => {
+      const active = idx === 0 ? "active" : "";
+      const itemsHtml = group.map(p => `
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="card h-100 shadow-sm card-hover">
+            <img src="${p.img}" class="card-img-top" alt="${p.name}">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div class="fw-semibold">${p.name}</div>
+                <div class="price-tag">₺${p.price}</div>
               </div>
-            `;
-          });
-        }
-        document.addEventListener("DOMContentLoaded", renderRandomProducts);
-      </script>
+              <div class="text-muted small mb-3">${p.desc}</div>
+              <button class="btn btn-outline-dark w-100 btn-press add-to-cart"
+                data-item="${p.name}" data-price="${p.price}" type="button">
+                Sepete Ekle
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join("");
+
+      inner.innerHTML += `
+        <div class="carousel-item ${active}">
+          <div class="row g-4">
+            ${itemsHtml}
+          </div>
+        </div>
+      `;
+    });
+
+    // ربط أزرار يمين/يسار
+    const carouselEl = document.getElementById("productsCarousel");
+    const bsCarousel = window.bootstrap?.Carousel?.getOrCreateInstance(carouselEl, { interval: false, ride: false });
+
+    document.getElementById("prodNext")?.addEventListener("click", () => bsCarousel?.next());
+    document.getElementById("prodPrev")?.addEventListener("click", () => bsCarousel?.prev());
+  }
+
+  document.addEventListener("DOMContentLoaded", renderProductsCarousel);
+</script>
+
     </section>
 
     <!-- الطلب -->
