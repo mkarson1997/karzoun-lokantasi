@@ -74,29 +74,34 @@ export function formatMoney(v) {
 
 // ربط أزرار "Sepete Ekle" في أي صفحة
 // لازم الزر يحمل data-add-to-cart + بيانات المنتج بالـ dataset
-export function bindAddToCartButtons(root=document) {
+export function bindAddToCartButtons(root = document) {
   if (!root) root = document;
-  const btns = Array.from(root.querySelectorAll("[data-add-to-cart], .add-to-cart"));
-  btns.forEach(btn => {
-    if (btn.__bound) return;
-    btn.__bound = true;
 
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const item = {
-        id: btn.dataset.id || btn.dataset.name || btn.dataset.item,
-        name: btn.dataset.name || btn.dataset.item || "Ürün",
-        price: Number(btn.dataset.price || 0),
-        img: btn.dataset.img || btn.closest('.card')?.querySelector('img')?.getAttribute('src') || null,
-        qty: 1
-      };
-      addItem(item);
+  // ✅ Delegation: اربط مرة واحدة فقط على الـ root (الأفضل document)
+  if (root.__cartDelegated) return;
+  root.__cartDelegated = true;
 
-      // تأثير بسيط "يطير للسلة"
-      try { animateFlyToCart(btn); } catch {}
-    });
-  });
+  root.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-add-to-cart], .add-to-cart");
+    if (!btn) return;
+
+    // إذا الزر داخل رابط أو في عناصر ممكن تعمل Navigation، امنعها
+    e.preventDefault();
+
+    const item = {
+      id: btn.dataset.id || btn.dataset.name || btn.dataset.item,
+      name: btn.dataset.name || btn.dataset.item || "Ürün",
+      price: Number(btn.dataset.price || 0),
+      img: btn.dataset.img || btn.closest(".card")?.querySelector("img")?.getAttribute("src") || null,
+      qty: 1
+    };
+
+    addItem(item);
+
+    try { animateFlyToCart(btn); } catch {}
+  }, { passive: false });
 }
+
 
 // تأثير: صورة/نقطة تطير باتجاه زر السلة
 function animateFlyToCart(btn) {
